@@ -22,7 +22,7 @@ jobs:
         with:
           token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           chat: ${{ secrets.TELEGRAM_BOT_GROUP }}
-          text: '${{ inputs.name }} - the result status: ${{ inputs.status }}'
+          text: "${{ inputs.name }} - the result status: ${{ inputs.status }}"
 
       - name: Get output time
         run: echo 'The event happened at ${{ steps.sendmessage.outputs.time }}'

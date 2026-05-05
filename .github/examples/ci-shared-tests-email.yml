@@ -12,18 +12,18 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'develop'
+  group: "develop"
   cancel-in-progress: false
 
 jobs:
   playwright:
-    uses: 'Saturnych/actions-workflows/.github/workflows/playwright.yml@develop'
+    uses: "Saturnych/actions-workflows/.github/workflows/playwright.yml@develop"
     secrets: inherit
 
   email:
     needs: playwright
-    uses: 'Saturnych/actions-workflows/.github/workflows/email.yml@develop'
+    uses: "Saturnych/actions-workflows/.github/workflows/email.yml@develop"
     with:
-      name: 'Tests'
+      name: "Tests"
       status: ${{ needs.playwright.outputs.status }}
     secrets: inherit

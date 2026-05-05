@@ -9,6 +9,9 @@ on:
       status:
         required: true
         type: string
+      result:
+        required: false
+        type: string
 
 jobs:
   send:
@@ -35,15 +38,18 @@ jobs:
           # Optional (recommended) mail server password:
           password: ${{ secrets.PRIVATE_SMTP_PASSWORD }}
           # Required mail subject:
-          subject: 'GitHub Actions: ${{ inputs.name }} ${{ inputs.status }}'
+          subject: "GitHub Actions: ${{ inputs.name }} ${{ inputs.status }}"
           # Required recipients' addresses devided by comas:
           to: ${{ secrets.PRIVATE_SMTP_NOTIFY }}
           # Required sender full name (address can be skipped):
-          from: 'GitHub ${{ github.repository }}'
+          from: "GitHub ${{ github.repository }}"
           # Optional plain body:
           body: |
-            The action for commit ${{ github.sha }} has the result status: ${{ inputs.status }}.
+            The action for commit ${{ github.sha }} has the status: ${{ inputs.status }}.
             See the details here: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+            And the result is:
+            ${{ inputs.result }}
           # Optional HTML body read from file:
           # html_body: file://README.html
           # Optional carbon copy recipients:
